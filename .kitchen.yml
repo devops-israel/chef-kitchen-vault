@@ -1,0 +1,21 @@
+---
+driver_plugin: docker
+
+driver_config:
+  require_chef_omnibus: true
+  
+
+provisioner:
+  name: chef_zero
+  client_rb: 
+     node_name: zero
+     client_key: zero.pem
+
+platforms:
+  - name: centos-6
+
+suites:
+- name: default
+  run_list:
+  - recipe[prepare]
+  - recipe[vault-use]
