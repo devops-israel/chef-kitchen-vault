@@ -1,8 +1,8 @@
-name             'vault-use'
-maintainer       'YOUR_COMPANY_NAME'
-maintainer_email 'YOUR_EMAIL'
+name             'kitchen-vault'
+maintainer       'DevOps IL'
+maintainer_email 'ilya@devops.il'
 license          'All rights reserved'
-description      'Installs/Configures vault-use'
+description      'Installs/Configures kitchen-vault'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.1.0'
 depends          'chef-vault'

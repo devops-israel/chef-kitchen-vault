@@ -31,16 +31,16 @@ package 'openssl-dev' do
 end.run_action(:install)
 
 chef_gem 'cheffish'
+chef_gem 'chef-vault'
 
 require 'cheffish'
-chef_data_bag 'jenkins' do
+require 'chef-vault'
+chef_data_bag 'secrets' do
 end.run_action(:create)
 
-
 chef_vault_secret 'admin' do
-  data_bag 'jenkins'
+  data_bag 'secrets'
   raw_data({'password' => 'somepass'})
   admins 'zero'
   search '*:*'
 end.run_action(:create)
-

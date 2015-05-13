@@ -1,68 +1,12 @@
-vault-use Cookbook
+kitchen-vault Cookbook
 ==================
-TODO: Enter the cookbook description here.
+Example on using kitchen with chef-vault.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+##Problem:
+When we use chef-vault, we rely on chef server provided information (data bags, client keys, etc) which is not available when we test it in kitchen with chef-zero
 
-Requirements
-------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
-
-e.g.
-#### packages
-- `toaster` - vault-use needs toaster to brown your bagel.
-
-Attributes
-----------
-TODO: List your cookbook attributes here.
-
-e.g.
-#### vault-use::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['vault-use']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
-
-Usage
------
-#### vault-use::default
-TODO: Write usage instructions for each cookbook.
-
-e.g.
-Just include `vault-use` in your node's `run_list`:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[vault-use]"
-  ]
-}
-```
-
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
-
-License and Authors
--------------------
-Authors: TODO: List authors
+##Solution 
+This cookbook uses a few gotchas as workaround:
+1) Helper cookbook which creates secrets inside chef-zero environment. Stored under test/fixtures/cookbooks/prepare. It should be fully executed in compile time in order for chef-vault resources to be available for main cookbook at converge time
+2) Client and node information stored inside test/integration folder and added to chef-zero environment by kitchen
+3) client.rb settings inside .kithchen.yml tell chef-zero to use client name and key from test/integration

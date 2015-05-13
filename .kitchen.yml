@@ -9,7 +9,7 @@ provisioner:
   name: chef_zero
   client_rb: 
      node_name: zero
-     client_key: zero.pem
+     client_key: /tmp/kitchen/clients/zero.pem
 
 platforms:
   - name: centos-6
@@ -18,4 +18,4 @@ suites:
 - name: default
   run_list:
   - recipe[prepare]
-  - recipe[vault-use]
+  - recipe[kitchen-vault]

@@ -1,15 +1,15 @@
 #
-# Cookbook Name:: vault-use
+# Cookbook Name:: kitchen-vault
 # Recipe:: default
 #
-# Copyright 2015, YOUR_COMPANY_NAME
+# Copyright 2015, DevOps IL
 #
 # All rights reserved - Do Not Redistribute
 #
 include_recipe 'chef-vault'
 
-admin = chef_vault_item("jenkins", "admin")
+admin = chef_vault_item("secrets", "admin")
 
-file "/etc/mypw" do
+file "/tmp/mypw" do
     content admin["password"]
 end
